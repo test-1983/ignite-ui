@@ -4470,8 +4470,13 @@
 			/* Class applied to the editing element of numeric editor when value is negative. The class is applied only when the editor is in display mode (no focus). Default value is 'ui-igedit-negative' */
 			negative: "ui-igedit-negative"
 		},
-		_create: function () { //Numeric Editor
+		_createWidget: function (options) { //Numeric Editor
 
+			this._superApply(arguments);
+		},
+		_create: function () { //Numeric Editor
+			// D.P. 8th Aug 2017 #793 Should not initialize with wrong decimal values.
+			this._validateDecimalSettings(options);
 			// We need this option internaly for parsing the value, set this option via method so we can overwrite it.
 			$.ui.igTextEditor.prototype._create.call(this);
 
@@ -4484,8 +4489,6 @@
 			this._super();
 			this._setNumericType();
 
-			// D.P. 8th Aug 2017 #793 Should not initialize with wrong decimal values.
-			this._validateDecimalSettings();
 			this._validateRegionalSettings();
 			this._applyDataModeSettings();
 			var numericChars = "0123456789", dataMode = this.options.dataMode;
@@ -4626,27 +4629,27 @@
 				this.options.spinDelta = Number(this.options.spinDelta.toExponential());
 			}
 		},
-		_validateDecimalSettings: function() {
-			var minDecimalsName = this._numericType + "MinDecimals",
-				maxDecimalsName = this._numericType + "MaxDecimals";
+		_validateDecimalSettings: function(options) {
+			var minDecimalsName = this._setNumericType() + "MinDecimals",
+				maxDecimalsName = this._setNumericType() + "MaxDecimals";
 
-			if (this.options.minDecimals === null) {
-				this.options.minDecimals = this._getRegionalValue(minDecimalsName);
+			if (options.minDecimals === null) {
+				options.minDecimals = this._getRegionalValue(minDecimalsName);
 			}
 			try {
-				this._validateDecimalSetting("minDecimals", this.options.minDecimals);
+				this._validateDecimalSetting("minDecimals", options.minDecimals);
 			} catch (e) {
-				this.options.minDecimals = this._getRegionalValue(minDecimalsName);
+				options.minDecimals = this._getRegionalValue(minDecimalsName);
 				throw e;
 			}
 
-			if (this.options.maxDecimals === null) {
-				this.options.maxDecimals = this._getRegionalValue(maxDecimalsName);
+			if (options.maxDecimals === null) {
+				options.maxDecimals = this._getRegionalValue(maxDecimalsName);
 			}
 			try {
-				this._validateDecimalSetting("maxDecimals", this.options.maxDecimals);
+				this._validateDecimalSetting("maxDecimals", options.maxDecimals);
 			} catch (e) {
-				this.options.maxDecimals = this._getRegionalValue(maxDecimalsName);
+				options.maxDecimals = this._getRegionalValue(maxDecimalsName);
 				throw e;
 			}
 			this._validateDecimalMinMax();

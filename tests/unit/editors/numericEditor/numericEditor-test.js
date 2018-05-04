@@ -2358,7 +2358,8 @@ QUnit.test("Test roundDecimals options", function (assert) {
 
 QUnit.test("Test minDecimals/maxDecimals options", function (assert) {
 	assert.expect(78);
-	var $editorRound,
+	var $editor,
+		$editorRound,
 		$editorTrunc,
 		testData,
 		errorMessage,
@@ -2388,20 +2389,21 @@ QUnit.test("Test minDecimals/maxDecimals options", function (assert) {
 		errorMessage = $.ig.util.stringFormat($.ig.Editor.locale.decimalNumber, mode, "{optionName}", boundary);
 		for (index = 0; index < testData.length; index++) {
 			assert.throws(function () {
-				$editor = this.util.appendToFixture(this.inputTag).igNumericEditor({
+				$editor = this.util.appendToFixture(this.inputTag);
+				$editor.igNumericEditor({
 					dataMode: mode,
 					minDecimals: testData[index]
 				});
-				$editor.remove();
 			}, Error(errorMessage.replace("{optionName}", "minDecimals")), "Exception should be thrown");
-
+			$editor.remove();
 			assert.throws(function () {
-				$editor = this.util.appendToFixture(this.inputTag).igNumericEditor({
+				$editor = this.util.appendToFixture(this.inputTag);
+				$editor.igNumericEditor({
 					dataMode: mode,
 					maxDecimals: testData[index]
 				});
-				$editor.remove();
 			}, Error(errorMessage.replace("{optionName}", "maxDecimals")), "Exception should be thrown");
+			$editor.remove();
 		}
 	}
 
@@ -2440,10 +2442,12 @@ QUnit.test("Test minDecimals/maxDecimals options", function (assert) {
 	// Test Invalid min/max decimals:
 
 	function testDecimalBoundary(mode, option, value, boundary) {
+		var $editor;
 		assert.throws(function () {
 			var options = { dataMode: mode };
 			options[option] = value;
-			var $editor = this.util.appendToFixture(this.inputTag).igNumericEditor(options);
+			$editor = this.util.appendToFixture(this.inputTag);
+			$editor.igNumericEditor(options);
 		},
 			Error($.ig.Editor.locale.decimalNumber.replace("{0}", mode).replace("{1}", option).replace("{2}", boundary)),
 			$.ig.Editor.locale.decimalNumber + "not shown"
