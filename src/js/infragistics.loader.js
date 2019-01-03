@@ -679,13 +679,22 @@ $.ig.dependencies = [
 		description: $.ig.loaderClass.locale.descriptions.zoomSliderDescription
 	},
 	{
+		widget: "Annotation",
+		parentWidget: "igFinancialChart",
+		dependency: [ { name: "igFinancialChart" } ],
+		group: $.ig.loaderClass.locale.dvGroup,
+		scripts: [ "$path$/modules/infragistics.datachart_annotation.js" ],
+		description: $.ig.loaderClass.locale.descriptions.annotationDescription
+	},
+	{
         widget: "igFinancialChart.*",
 		dependency: [{ name: "Category", parentWidget: "igFinancialChart" },
 			{ name: "Financial", parentWidget: "igFinancialChart" },
 			{ name: "ExtendedFinancial", parentWidget: "igFinancialChart" },
 			{ name: "Interactivity", parentWidget: "igFinancialChart" },
 			{ name: "ZoomSlider", parentWidget: "igFinancialChart" },
-			{ name: "VisualData", parentWidget: "igFinancialChart" }
+			{ name: "VisualData", parentWidget: "igFinancialChart" },
+			{ name: "Annotation", parentWidget: "igFinancialChart" }
 		]
 	},
 	{
@@ -870,9 +879,18 @@ $.ig.dependencies = [
         description: $.ig.loaderClass.locale.descriptions.chartVisualDataDescription
     },
 	{
+		widget: "Annotation",
+		parentWidget: "igCategoryChart",
+		dependency: [ { name: "igCategoryChart" } ],
+		group: $.ig.loaderClass.locale.dvGroup,
+		scripts: [ "$path$/modules/infragistics.datachart_annotation.js" ],
+		description: $.ig.loaderClass.locale.descriptions.annotationDescription
+	},
+	{
         widget: "igCategoryChart.*",
 		dependency: [ { name: "Interactivity", parentWidget: "igCategoryChart" },
-					{ name: "VisualData", parentWidget: "igCategoryChart" }
+					{ name: "VisualData", parentWidget: "igCategoryChart" },
+					{ name: "Annotation", parentWidget: "igCategoryChart" }
 		]
 	},
 
