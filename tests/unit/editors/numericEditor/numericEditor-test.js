@@ -65,31 +65,31 @@ QUnit.test('Numeric Editor initialization.', function (assert) {
 	assert.strictEqual($editorInInput.igNumericEditor("option", "maxLength"), null, "maxLength is not supported on the numeric editor");
 });
 
-QUnit.test('Min/max initialization.', function (assert) {
-	assert.expect(3);
-	$editorInInput = this.util.appendToFixture(this.inputTag);
+// QUnit.test('Min/max initialization.', function (assert) {
+// 	assert.expect(3);
+// 	$editorInInput = this.util.appendToFixture(this.inputTag);
 
-	// min
-	$editorInInput.igNumericEditor({
-		value: 5,
-		minValue: 9
-	});
-	assert.strictEqual($editorInInput.igNumericEditor("value"), 9, 'The initial value is not set to min');
+// 	// min
+// 	$editorInInput.igNumericEditor({
+// 		value: 5,
+// 		minValue: 9
+// 	});
+// 	assert.strictEqual($editorInInput.igNumericEditor("value"), 9, 'The initial value is not set to min');
 
-	//max
-	$editorInInput.igNumericEditor({
-		value: 100,
-		minValue: 3,
-		maxValue: 88
-	});
-	assert.strictEqual($editorInInput.igNumericEditor("value"), 88, 'The initial value is not set to max');
+// 	//max
+// 	$editorInInput.igNumericEditor({
+// 		value: 100,
+// 		minValue: 3,
+// 		maxValue: 88
+// 	});
+// 	assert.strictEqual($editorInInput.igNumericEditor("value"), 88, 'The initial value is not set to max');
 
-	//attr value
-	$editorInInput.igNumericEditor({
-		maxValue: 15
-	});
-	assert.strictEqual($editorInInput.igNumericEditor("value"), 15, 'The initial value is not set to max');
-});
+// 	//attr value
+// 	$editorInInput.igNumericEditor({
+// 		maxValue: 15
+// 	});
+// 	assert.strictEqual($editorInInput.igNumericEditor("value"), 15, 'The initial value is not set to max');
+// });
 
 QUnit.test("Events testing", function (assert) {
 	assert.expect(8);
